@@ -19,7 +19,7 @@ def index():
 def news(news_id):
 
     '''
-    View movie page function that returns the news details page and its data
+    View news page function that returns the news details page and its data
     '''
-    title = f'You are viewing {news_id}'
+    title = f'You are reading {news_id}'
     return render_template('news.html',title = title)
