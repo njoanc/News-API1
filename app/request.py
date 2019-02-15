@@ -11,25 +11,32 @@ api_key = app.config['NEWS_API_KEY']
 # Getting the movie base url
 base_url = app.config["NEWS_API_BASE_URL"]
 
-def get_news(category):
+def get_news(id):
     '''
     Function that gets the json response to our url request
     '''
-    get_news_url = base_url.format(category,api_key)
+    get_news_details_url = base_url.format(id,api_key)
 
-    with urllib.request.urlopen(get_news_url) as url:
-        get_news_data = url.read()
-        get_news_response = json.loads(get_news_data)
+    with urllib.request.urlopen(get_news_details_url) as url:
+        news_details_data = url.read()
+        news_details_response = json.loads(news_details_data)
 
-        news_articles = None
+        news_object = None
 
-        if get_news_response['articles']:
-            news_articles_list = get_news_response['articles']
-            news_articles = process_articles(news_articles_list)
+        if news_details_response:
+                id = news_details_response.get('id')
+                name = news_details_response.get('name')
+                author = news_details_response.get('author')
+                title  = news_details_response.get('title ')
+                description = news_details_response.get('description')
+                url = news_details_response.get('url')
+                publishedAt = news_details_response.get('publishedAt')
+                content = news_details_response.get('content')
 
+                 news_object = News(id,name,author,title,description,url,urlToImage,publishedAt,content)
         else:
                 print("API didn't succeed")
-    return news_articles
+    return news_object
 
 def process_articles(news_list):
     '''
