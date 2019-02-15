@@ -6,7 +6,7 @@
         {% if title %}
         <title> {{ title }}</title>
         {% else %}
-        <title> Welcome to the best News Articles website </title>
+        <title> Welcome to the best News Articles ebsite </title>
         {% endif %}
     </head>
     
@@ -22,9 +22,19 @@
             {{ macro.displayNewsList(upcoming)}}
       </ul>
       <!-- Now showing news -->
-      <h3>Now Showing</h3>
+      <h3>Current Broadcasting</h3>
        <ul>
-            {{ macro.displayNewsList(now_showing)}}
+            {{ macro.displayNewsList(current_broadcasting)}}
+      </ul>
+      <!-- Now showing news -->
+      <h3>Newspapers</h3>
+       <ul>
+            {{ macro.displayNewsList(newspapers)}}
+      </ul>
+      <!-- Now showing news -->
+      <h3>Television broadcasting</h3>
+       <ul>
+            {{ macro.displayNewsList(television)}}
       </ul>
     </body>
 </html>

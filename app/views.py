@@ -14,10 +14,12 @@ def index():
      # Getting popular news
     popular_news = get_news('popular')
     upcoming_news = get_news('upcoming')
-    now_showing_news = get_news('now_playing')
+    current_showing_news = get_news('current_broadcasting')
+    regional_news= get_news('newspapers')
+    mass_media_news=get_news('television')
     # print(popular_movies)
     title = 'Home - Welcome to The best News Articles Website Online'
-    return render_template('index.html', title = title,popular = popular_news,upcoming = upcoming_news, now_showing = now_showing_news)
+    return render_template('index.html', title = title,popular = popular_news,upcoming = upcoming_news, current_broadcasting = current_showing_news,newspapers=regional_news,television=mass_media_news)
     title = 'Home - Welcome to The best News Review Website Online'
     return render_template('index.html', title = title)
 
