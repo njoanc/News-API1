@@ -48,13 +48,13 @@ def process_results(news_list):
         title = news_item.get('title')
         description=news_item.get('description')
         url=news_item.get('url')
-        image = news_item.get('image_path')
+        urlToImage = news_item.get('urlToImage')
         publishedAt=news_item.get('publishedAt')
         content= news_item.get('content')
         
 
         if image:
-            news_object = News(id,name,author,title,description,url,image,publishedAt,content)
+            news_object = News(id,name,author,title,description,url,urlToImage,publishedAt,content)
             news_results.append(news_object)
 
     return news_results
