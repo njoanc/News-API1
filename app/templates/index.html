@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% extends 'base.html'%}
         {% import 'macros.html' as macro%}
         <meta charset="utf-8">
         {% if title %}
@@ -11,30 +12,34 @@
     </head>
     
     <body>
-       <!-- Popular news section  -->
-       <h3> Popular News</h3>
-       <ul>
+        <!-- Content block -->
+        {% block content %}
+        <!-- Popular news section  -->
+        <h3> Popular News</h3>
+        <ul>
             {{ macro.displayNewsList(popular)}}
-      </ul> 
-       <!-- Upcoming news  -->
-       <h3> Upcoming News </h3>
-       <ul>
+        </ul> 
+        <!-- Upcoming news  -->
+        <h3> Upcoming News </h3>
+        <ul>
             {{ macro.displayNewsList(upcoming)}}
-      </ul>
-      <!-- Now showing news -->
-      <h3>Current Broadcasting</h3>
-       <ul>
+        </ul>
+        <!-- Now showing news -->
+        <h3>Current Broadcasting</h3>
+        <ul>
             {{ macro.displayNewsList(current_broadcasting)}}
-      </ul>
-      <!-- Now showing news -->
-      <h3>Newspapers</h3>
-       <ul>
+        </ul>
+        <!-- Now showing news -->
+        <h3>Newspapers</h3>
+        <ul>
             {{ macro.displayNewsList(newspapers)}}
-      </ul>
-      <!-- Now showing news -->
-      <h3>Television broadcasting</h3>
-       <ul>
+        </ul>
+        <!-- Now showing news -->
+        <h3>Television broadcasting</h3>
+        <ul>
             {{ macro.displayNewsList(television)}}
-      </ul>
+        </ul>
+        {% endblock%}
     </body>
+        
 </html>
