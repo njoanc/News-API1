@@ -21,26 +21,27 @@ def get_news(category):
         get_news_data = url.read()
         get_news_response = json.loads(get_news_data)
 
-        news_results = None
+        news_articles = None
 
-        if get_news_response['results']:
-            news_results_list = get_news_response['results']
-            news_results = process_results(news_results_list)
+        if get_news_response['articles']:
+            news_articles_list = get_news_response['articles']
+            news_articles = process_articles(news_articles_list)
 
+        else:
+                print("API didn't succeed")
+    return news_articles
 
-    return news_results
-
-def process_results(news_list):
+def process_articles(news_list):
     '''
-    Function  that processes the news result and transform them to a list of Objects
+    Function  that processes the news articles and transform them to a list of Objects
 
     Args:
         news_list: A list of dictionaries that contain news details
 
     Returns :
-        news_results: A list of news objects
+        news_articles: A list of news objects
     '''
-    news_results = []
+    news_articles = []
     for news_item in news_list:
         id = news_item.get('id')
         name=news_item.get('name')
@@ -53,8 +54,8 @@ def process_results(news_list):
         content= news_item.get('content')
         
 
-        if image:
+        if urlToImage:
             news_object = News(id,name,author,title,description,url,urlToImage,publishedAt,content)
-            news_results.append(news_object)
+            news_articles.append(news_object)
 
-    return news_results
+    return news_articles
