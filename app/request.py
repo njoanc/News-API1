@@ -11,33 +11,39 @@ api_key = app.config['NEWS_API_KEY']
 # Getting the movie base url
 base_url = app.config["NEWS_API_BASE_URL"]
 
-def get_news(id):
-    '''
-    Function that gets the json response to our url request
-    '''
-    get_news_details_url = base_url.format(id,api_key)
+def get_news():
+        '''
+        Function that gets the json response to our url request
+        '''
+        get_news_details_url = base_url
 
-    with urllib.request.urlopen(get_news_details_url) as url:
-        news_details_data = url.read()
-        news_details_response = json.loads(news_details_data)
+        with urllib.request.urlopen(get_news_details_url) as url:
+                news_details_data = url.read()
+                news_details_response = json.loads(news_details_data)
+                news_object = None
+                if news_details_response["articles"]:
+                        news_results_list = news_details_response["articles"]
+                        news_object = process_articles(news_results_list)
 
-        news_object = None
+        
+        print(news_object)
+        return news_object
+        # if news_details_response["articles"]:
+        #         id = news_details_response.get('id')
+        #         name = news_details_response.get('name')
+        #         author = news_details_response.get('author')
+        #         title  = news_details_response.get('title ')
+        #         description = news_details_response.get('description')
+        #         url = news_details_response.get('url')
+        #         urlToImage=news_details_response.get('urlToImage')
+        #         publishedAt = news_details_response.get('publishedAt')
+        #         content = news_details_response.get('content')
 
-        if news_details_response:
-                id = news_details_response.get('id')
-                name = news_details_response.get('name')
-                author = news_details_response.get('author')
-                title  = news_details_response.get('title ')
-                description = news_details_response.get('description')
-                url = news_details_response.get('url')
-                urlToImage=news_details_response.get('urlToImage')
-                publishedAt = news_details_response.get('publishedAt')
-                content = news_details_response.get('content')
-
-                 news_object = News(id,name,author,title,description,url,urlToImage,publishedAt,content)
-        else:
-                print("API didn't succeed")
-    return news_object
+        #         news_object = News(id,name,author,title,description,url,urlToImage,publishedAt,content)
+        # else:
+        #         print("API didn't succeed")
+        
+        return news_object
 
 def process_articles(news_list):
     '''
@@ -51,8 +57,8 @@ def process_articles(news_list):
     '''
     news_articles = []
     for news_item in news_list:
-        id = news_item.get('id')
-        name=news_item.get('name')
+        # id = news_item.get('id')
+        # name=news_item.get('name')
         author=news_item.get('author')
         title = news_item.get('title')
         description=news_item.get('description')
@@ -63,7 +69,7 @@ def process_articles(news_list):
         
 
         if urlToImage:
-            news_object = News(id,name,author,title,description,url,urlToImage,publishedAt,content)
+            news_object = News(author,title,description,url,urlToImage,publishedAt,content)
             news_articles.append(news_object)
 
     return news_articles
