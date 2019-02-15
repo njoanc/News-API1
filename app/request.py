@@ -30,6 +30,7 @@ def get_news(id):
                 title  = news_details_response.get('title ')
                 description = news_details_response.get('description')
                 url = news_details_response.get('url')
+                urlToImage=news_details_response.get('urlToImage')
                 publishedAt = news_details_response.get('publishedAt')
                 content = news_details_response.get('content')
 
