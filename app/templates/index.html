@@ -3,12 +3,19 @@
     <head>
         {% extends 'base.html'%}
         {% import 'macros.html' as macro%}
-        <meta charset="utf-8">
+
+        <!-- Styles block -->
+        {% block styles%}
+        {{ super() }}
+        <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+        {% endblock %}
+
+        <!-- <meta charset="utf-8">
         {% if title %}
         <title> {{ title }}</title>
         {% else %}
         <title> Welcome to the best News Articles website </title>
-        {% endif %}
+        {% endif %} -->
     </head>
     
     <body>

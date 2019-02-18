@@ -8,18 +8,22 @@ News = news.News
 # Getting api key
 api_key = app.config['NEWS_API_KEY']
 
-# Getting the movie base url
+
+# Getting the news base url
 base_url = app.config["NEWS_API_BASE_URL"]
 
 def get_news(title):
+        
         '''
         Function that gets the json response to our url request
         '''
         get_news_details_url = base_url.format(title,api_key)
+        print(get_news_details_url)
 
         with urllib.request.urlopen(get_news_details_url) as url:
                 news_details_data = url.read()
                 news_details_response = json.loads(news_details_data)
+                print(news_details_response)
 
         news_object = None
 
@@ -56,8 +60,8 @@ def process_articles(news_list):
                 publishedAt = news_item.get('publishedAt')
                 content = news_item.get('content')
 
-                if title:
-                        news_object = News(author,title,description,url,urlToImage,publishedAt,content)
-                        news_articles.append(news_object)
+        if title:
+                news_object = News(author,title,description,url,urlToImage,publishedAt,content)
+                news_articles.append(news_object)
 
         return news_articles 
