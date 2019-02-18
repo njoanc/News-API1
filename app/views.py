@@ -1,6 +1,6 @@
 from flask import render_template
 from app import app
-from .request import get_news, get_news
+from .request import get_news, get_news, search_news
 
 
 # Views
@@ -31,3 +31,14 @@ def news(category):
     # print(news.author)
     title = f'You are reading {news.title}'
     return render_template('news.html',title = title,news=news)
+
+@app.route('/search/<news_title>')
+def search(news_title):
+    '''
+    View function to display the search results
+    '''
+    news_title_list = news_title.split(" ")
+    news_title_format = "+".join(news_title_list)
+    searched_news = search_news(news_title_format)
+    title = f'search results for {news_title}'
+    return render_template('search.html',news = searched_news)
