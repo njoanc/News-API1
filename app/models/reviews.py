@@ -18,3 +18,18 @@ class Review:
     @classmethod
     def clear_reviews(cls):
         Review.all_reviews.clear()
+
+    class Review:
+
+    all_reviews = []
+...... # Some code is here
+    @classmethod
+    def get_reviews(cls,title):
+
+        response = []
+
+        for review in cls.all_reviews:
+            if review.news_title == title:
+                response.append(review)
+
+        return response
