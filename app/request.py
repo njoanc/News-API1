@@ -11,51 +11,53 @@ api_key = app.config['NEWS_API_KEY']
 # Getting the movie base url
 base_url = app.config["NEWS_API_BASE_URL"]
 
-def get_news(category):
+def get_news(title):
         '''
         Function that gets the json response to our url request
         '''
-        def get_news(category):
-    '''
-    Function that gets the json response to our url request
-    '''
-    get_news_url = base_url.format(category,api_key)
+        get_news_details_url = base_url.format(title,api_key)
 
-    with urllib.request.urlopen(get_news_url) as url:
-        get_news_data = url.read()
-        get_news_response = json.loads(get_news_data)
+        with urllib.request.urlopen(get_news_details_url) as url:
+                news_details_data = url.read()
+                news_details_response = json.loads(news_details_data)
 
-        news_results = None
+        news_object = None
 
-        if get_news_response['articles']:
-            news_articles_list = get_news_response['articles']
-            news_articles = process_articles(news_articles_list)
+        if news_details_response:
+                author = news_details_response.get('author')
+                title = news_details_response.get('title')
+                description = news_details_response.get('description')
+                url = news_details_response.get('url')
+                urlToImage = news_details_response.get('urlToImage')
+                publishedAt = news_details_response.get('publishedAt')
+                content = news_details_response.get('content')
 
+                news_object = News(author,title,description,url,urlToImage,publishedAt,content)
 
-    return news_articles
+        return news_object
 
-   def process_articles(news_list):
-    '''
-    Function  that processes the news articles and transform them to a list of Objects
+def process_articles(news_list):
+        '''
+        Function  that processes the news articles and transform them to a list of Objects
 
-    Args:
+        Args:
         news_list: A list of dictionaries that contain news details
 
-    Returns :
+        Returns :
         news_articles: A list of news objects
-    '''
-    news_articles = []
-    for news_item in news_list:
-        author = news_item.get('author')    
-        title = news_item.get('title')
-        description = movie_item.get('description')
-        url = movie_item.get('url')
-        urlToImage = movie_item.get('urlToImage')
-        publishedAt = movie_item.get('publishedAt')
-        content = news_item.get('content')
+        '''
+        news_articles = []
+        for news_item in news_list:
+                author = news_item.get('author')    
+                title = news_item.get('title')
+                description = news_item.get('description')
+                url = news_item.get('url')
+                urlToImage = news_item.get('urlToImage')
+                publishedAt = news_item.get('publishedAt')
+                content = news_item.get('content')
 
-        if title:
-            new_object = News(author,title,description,url,urlToImage,publishedAt,content)
-            movie_articles.append(news_object)
+                if title:
+                        news_object = News(author,title,description,url,urlToImage,publishedAt,content)
+                        news_articles.append(news_object)
 
-    return news_results 
+        return news_articles 

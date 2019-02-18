@@ -12,10 +12,10 @@ def index():
     '''
 
      # Getting popular news, upcoming current,regional and television news
-    popular_news = get_news()
-    business_news = get_news()
-    techCrunch_news = get_news()
-    publishedAt_news= get_news()
+    popular_news = get_news('popular')
+    business_news = get_news('business')
+    techCrunch_news = get_news('techCrunch')
+    publishedAt_news= get_news('publishedAt')
     title = 'Home - Welcome to The best News Articles Website Online'
     return render_template('index.html', title = title,popular = popular_news, business=business_news, techCrunch= techCrunch_news, publishedAt=publishedAt_news)
     
