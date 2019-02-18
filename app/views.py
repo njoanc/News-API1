@@ -31,13 +31,13 @@ def index():
     
 
 
-@app.route('/news/<category>')
-def news(category):
+@app.route('/news/<title>')
+def news(title):
 
     '''
     View news page function that returns the news details page and its data
     '''
-    news = get_news(category)
+    news = get_news(title)
     # print(news.author)
     title = f'You are reading {news.title}'
     return render_template('news.html',title = title,news=news)

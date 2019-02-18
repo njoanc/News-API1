@@ -1,54 +1,52 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% extends 'base.html'%}
-        {% import 'macros.html' as macro%}
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
 
-        <!-- Styles block -->
-        {% block styles%}
-        {{ super() }}
-        <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-        {% endblock %}
+<!-- Styles block -->
 
-        <!-- <meta charset="utf-8">
-        {% if title %}
-        <title> {{ title }}</title>
-        {% else %}
-        <title> Welcome to the best News Articles website </title>
-        {% endif %} -->
-    </head>
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+<!-- Content block -->
+{% block content %}
+<div class="container">
+    <div form>
+        <form>
+            <input type="text" name="news_query" placeholder="Search for News" class="form-control">
+            <input type="submit"  value="Submit" class="btn btn-default">
+        </form>
+    </div>
+        
     
-    <body>
-        <!-- Content block -->
-        {% block content %}
-        <div class="container">
-                <form>
-                    <input type="text" name="news_query" placeholder="Search for News" class="form-control">
-                    <input type="submit"  value="Submit" class="btn btn-default">
-                </form>
-            
-        </div>
-        <!-- Popular news section  -->
+
+    <!-- Popular news section  -->
+    <div popularNews>
         <h3> Popular News</h3>
         <ul>{{ macro.displayNewsList(popular)}}</ul> 
-        
-        <!-- Upcoming news  -->
+    </div>
+
+    <!-- Upcoming news  -->
+    <div upcomingNews>
         <h3> Date of publication </h3>
         <ul>
             {{ macro.displayNewsList(publishedAt)}} -->
-        </ul> 
-        <!-- Business News -->
-        <h3>Business News</h3>
+        </ul>
+    </div>
+    <!-- Business News -->
+    <div businessNews><h3>Business News</h3>
         <ul>
             {{ macro.displayNewsList(business)}}
-        </ul> 
-        <!-- TechCrunch -->
+        </ul>
+    </div>
+    
+    <!-- TechCrunch -->
+    <div> techCrunch
         <h3>TechCrunch News</h3>
         <ul>
             {{ macro.displayNewsList(techCrunch)}}
-        </ul> 
-        
-        {% endblock%}
-    </body>
-        
-</html>
+        </ul>
+    </div>
+ </div>
+
+{% endblock%}
+    
