@@ -54,7 +54,7 @@ def search(news_title):
     return render_template('search.html',news = searched_news)
 
 @app.route('/news/review/new/<category>', methods = ['GET','POST'])
-def new_review(id):
+def new_review(title):
     form = ReviewForm()
     news = get_news(title)
 
@@ -67,3 +67,15 @@ def new_review(id):
 
     title = f'{news.title} review'
     return render_template('new_review.html',title = title, review_form=form, news=news)
+
+@app.route('/news/<title>')
+def news(title):
+
+    '''
+    View news page function that returns the news details page and its data
+    '''
+    news = get_news(title)
+    title = f'{news.title}'
+    reviews = Review.get_reviews(news.title)
+
+    return render_template('news.html',title = title,news = news,reviews = reviews)
