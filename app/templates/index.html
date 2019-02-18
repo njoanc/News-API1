@@ -7,7 +7,7 @@
         {% if title %}
         <title> {{ title }}</title>
         {% else %}
-        <title> Welcome to the best News Articles ebsite </title>
+        <title> Welcome to the best News Articles website </title>
         {% endif %}
     </head>
     
@@ -19,25 +19,21 @@
         <ul>{{ macro.displayNewsList(popular)}}</ul> 
         
         <!-- Upcoming news  -->
-        <!-- <h3> Upcoming News </h3>
+        <h3> Date of publication </h3>
         <ul>
-            {{ macro.displayNewsList(upcoming)}} -->
-        <!-- </ul> -->
-        <!-- Now showing news -->
-        <!-- <h3>Current Broadcasting</h3>
+            {{ macro.displayNewsList(publishedAt)}} -->
+        </ul> 
+        <!-- Business News -->
+        <h3>Business News</h3>
         <ul>
-            {{ macro.displayNewsList(current_broadcasting)}}
-        </ul> -->
-        <!-- Now showing news -->
-        <!-- <h3>Newspapers</h3>
+            {{ macro.displayNewsList(business)}}
+        </ul> 
+        <!-- TechCrunch -->
+        <h3>TechCrunch News</h3>
         <ul>
-            {{ macro.displayNewsList(newspapers)}}
-        </ul> -->
-        <!-- Now showing news -->
-        <!-- <h3>Television broadcasting</h3>
-        <ul>
-            {{ macro.displayNewsList(television)}}
-        </ul> -->
+            {{ macro.displayNewsList(techCrunch)}}
+        </ul> 
+        
         {% endblock%}
     </body>
         

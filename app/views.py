@@ -13,15 +13,12 @@ def index():
 
      # Getting popular news, upcoming current,regional and television news
     popular_news = get_news()
-    # upcoming_news = get_news('upcoming')
-    # current_showing_news = get_news('current_broadcasting')
-    # regional_news= get_news('newspapers')
-    # mass_media_news=get_news('television')
-    # print(popular_news)
+    business_news = get_news()
+    techCrunch_news = get_news()
+    publishedAt_news= get_news()
     title = 'Home - Welcome to The best News Articles Website Online'
-    return render_template('index.html', title = title,popular = popular_news)
-    # title = 'Home - Welcome to The best News Review Website Online'
-    # return render_template('index.html', title = title)
+    return render_template('index.html', title = title,popular = popular_news, business=business_news, techCrunch= techCrunch_news, publishedAt=publishedAt_news)
+    
 
 
 @app.route('/news/<int:id>')

@@ -22,8 +22,8 @@ def get_news():
                 news_details_response = json.loads(news_details_data)
                 news_object = None
                 if news_details_response["articles"]:
-                        news_results_list = news_details_response["articles"]
-                        news_object = process_articles(news_results_list)
+                        news_articles_list = news_details_response["articles"]
+                        news_object = process_articles(news_articles_list)
 
         
         print(news_object)
