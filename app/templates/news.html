@@ -1,6 +1,7 @@
 {% extends 'base.html'%}
 <!-- Content block -->
 {% block content %}
+{% import 'macros.html' as macro%}
 <div class="container">
 
     <!-- Poster background -->
@@ -9,6 +10,15 @@
         </div>
     
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 news-details">
+            <h1>Reviews</h1>
+            <hr>
+            {% if reviews %}
+            {{macro.displayReviews(reviews)}}
+
+            {% else%}   
+            <h3 class="text-center">This news has no reviews</h3>
+            <a class="btn btn-success btn-lg text-center" href="/news/review/new/{{news.title}}"> Write a new review</a>
+            {% endif %}
             <h3>{{ news.title }}</h3>
             <p class="author"> {{ news.author }}</p>
             <p class="image"> {{ news.urlToImage }}</p>
