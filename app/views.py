@@ -1,6 +1,9 @@
 from flask import render_template,request,redirect,url_for
 from app import app
 from .request import get_news, get_news, search_news
+from .models import review
+from .forms import ReviewForm
+Review = review.Review
 
 
 # Views
@@ -49,3 +52,18 @@ def search(news_title):
     searched_news = search_news(news_title_format)
     title = f'search results for {news_title}'
     return render_template('search.html',news = searched_news)
+
+@app.route('/news/review/new/<category>', methods = ['GET','POST'])
+def new_review(id):
+    form = ReviewForm()
+    news = get_news(title)
+
+    if form.validate_on_submit():
+        title = form.title.data
+        review = form.review.data
+        new_review = Review(news.category,title,news.urlToImage,review)
+        new_review.save_review()
+        return redirect(url_for('news',title = movie.title ))
+
+    title = f'{news.title} review'
+    return render_template('new_review.html',title = title, review_form=form, news=news)
