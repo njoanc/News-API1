@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template,request,redirect,url_for
 from app import app
 from .request import get_news, get_news, search_news
 
@@ -13,11 +13,18 @@ def index():
 
      # Getting popular news, upcoming current,regional and television news
     popular_news = get_news('popular')
-    # business_news = get_news('business')
-    # techCrunch_news = get_news('techCrunch')
-    # publishedAt_news= get_news('publishedAt')
+    business_news = get_news('business')
+    techCrunch_news = get_news('techCrunch')
+    publishedAt_news= get_news('publishedAt')
+
     title = 'Home - Welcome to The best News Articles Website Online'
-    return render_template('index.html', title = title,popular = popular_news)
+
+     search_news = request.args.get('news_query')
+
+    if search_news:
+        return redirect(url_for('search',news_title=search_news))
+    else:
+    return render_template('index.html', title = title,popular = popular_news,business=business_news, techCrunch=techCrunch_news, publishedAt=publishedAt_news)
     
 
 
