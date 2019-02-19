@@ -28,7 +28,7 @@ def get_news(category):
             news_articles_list = get_news_response['articles']
         #     print(news_articles_list)
             news_articles = process_articles(news_articles_list)
-            print(news_articles)
+            # print(news_articles)
 
 
     return news_articles
@@ -36,7 +36,7 @@ def get_news(category):
 
 def get_movie(title):
     get_movie_details_url = news_url.format(title,api_key)
-
+    print(get_movie_details_url)
     with urllib.request.urlopen(get_movie_details_url) as url:
         movie_details_data = url.read()
         movie_details_response = json.loads(movie_details_data)
@@ -55,7 +55,7 @@ def get_movie(title):
     return news_object
 
 def process_articles(news_list):
-    print(news_list)
+    # print(news_list)
     '''
     Function  that processes the movie result and transform them to a list of Objects
     Args:
@@ -75,7 +75,7 @@ def process_articles(news_list):
 
         news_object = News(author,title,description,url,urlToImage,publishedAt,content)
         news_articles.append(news_object)
-
+        # print(news_object.title)
     return news_articles
 
 def search_news(news_title):
