@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for
 from app import app
-from .request import get_news, get_news, search_news
-from .models import review
-from .forms import ReviewForm
-Review = review.Review
+from .request import get_news,search_news
+# from .models import review
+# from .forms import ReviewForm
+# Review = review.Review
 
 
 # Views
@@ -15,19 +15,20 @@ def index():
     '''
 
      # Getting popular news, upcoming current,regional and television news
-    popular_news = get_news('popular')
-    business_news = get_news('business')
-    techCrunch_news = get_news('techCrunch')
-    publishedAt_news= get_news('publishedAt')
+    popular_news = get_news('everything')
+    # business_news = get_news('business')
+    # techCrunch_news = get_news('techCrunch')
+    # publishedAt_news= get_news('publishedAt')
 
     title = 'Home - Welcome to The best News Articles Website Online'
+    return render_template('index.html', title = title,popular = popular_news)
 
-     search_news = request.args.get('news_query')
+    # search_news = request.args.get('news_query')
 
-    if search_news:
-        return redirect(url_for('search',news_title=search_news))
-    else:
-    return render_template('index.html', title = title,popular = popular_news,business=business_news, techCrunch=techCrunch_news, publishedAt=publishedAt_news)
+    # if search_news:
+    #     return redirect(url_for('search',news_title=search_news))
+    # else:
+    #     return render_template('index.html', title = title,popular = popular_news,business=business_news, techCrunch=techCrunch_news, publishedAt=publishedAt_news)
     
 
 
@@ -38,9 +39,12 @@ def news(title):
     View news page function that returns the news details page and its data
     '''
     news = get_news(title)
+    print(news)
     # print(news.author)
     title = f'You are reading {news.title}'
-    return render_template('news.html',title = title,news=news)
+    reviews = Review.get_reviews(news.title)
+
+    return render_template('news.html',title = title,news=news,reviews = reviews)
 
 @app.route('/search/<news_title>')
 def search(news_title):
@@ -53,7 +57,7 @@ def search(news_title):
     title = f'search results for {news_title}'
     return render_template('search.html',news = searched_news)
 
-@app.route('/news/review/new/<category>', methods = ['GET','POST'])
+@app.route('/news/review/new/<title>', methods = ['GET','POST'])
 def new_review(title):
     form = ReviewForm()
     news = get_news(title)
@@ -63,21 +67,21 @@ def new_review(title):
         review = form.review.data
         new_review = Review(news.category,title,news.urlToImage,review)
         new_review.save_review()
-        return redirect(url_for('news',title = movie.title ))
+        return redirect(url_for('news',title = news.title ))
 
     title = f'{news.title} review'
     return render_template('new_review.html',title = title, review_form=form, news=news)
 
-@app.route('/news/<title>')
-def news(title):
+# @app.route('/news/<title>')
+# def news(title):
 
-    '''
-    View news page function that returns the news details page and its data
-    '''
-    news = get_news(title)
-    title = f'{news.title}'
-    reviews = Review.get_reviews(news.title)
+#     '''
+#     View news page function that returns the news details page and its data
+#     '''
+#     news = get_news(title)
+#     title = f'{news.title}'
+#     reviews = Review.get_reviews(news.title)
 
-    return render_template('news.html',title = title,news = news,reviews = reviews)
+#     return render_template('news.html',title = title,news = news,reviews = reviews)
 
     
