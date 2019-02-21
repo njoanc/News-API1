@@ -18,20 +18,8 @@ def index():
     title = 'Home - Welcome to The best News Articles Website Online'
 
     popular_news = get_sources('everything')
-    # business_sources = get_sources('business')
-    # techCrunch_sources = get_sources('techCrunch')
-    # publishedAt_sources= get_sources('publishedAt')
-
-    
+   
     return render_template('index.html', title = title,popular = popular_news)
-
-    # search_news = request.args.get('news_query')
-
-    # if search_news:
-    #     return redirect(url_for('search',news_title=search_news))
-    # else:
-    #     return render_template('index.html', title = title,popular = popular_news,business=business_news, techCrunch=techCrunch_news, publishedAt=publishedAt_news)
-    
 
 
 @app.route('/news/<title>')
@@ -43,7 +31,7 @@ def news(title):
     news = get_news(title)
 
     title = f'{title}'
-    # reviews = Review.get_reviews(news.title)
+   
 
     return render_template('news.html',title = title,news=news)
 
