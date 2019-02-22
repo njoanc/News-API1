@@ -9,12 +9,7 @@ Review = reviews.Review
 # Views
 @app.route('/')
 def index():
-
-    '''
-    View root page function that returns the index page and its data
-    '''
-
-     # Getting popular news
+    # Getting popular news
     title = 'Home - Welcome to The best News Articles Website Online'
 
     popular_news = get_sources('everything')

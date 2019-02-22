@@ -1,9 +1,9 @@
 import urllib.request,json
 from .models import News
-from app import app
 
-News = news.News
-Source = news.Source
+
+# News = news.News
+# Source = news.Source
 # Getting api key
 api_key = None
 # Getting the news base url

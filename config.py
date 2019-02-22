@@ -1,4 +1,4 @@
-    import os
+import os
 
 class Config:
     '''
@@ -7,7 +7,8 @@ class Config:
     NEWS_SOURCES_BASE_URL='https://newsapi.org/v2/sources?apiKey=d1586deac05c4d1fbf9742533adf9dea'
     NEWS_API_BASE_URL= 'https://newsapi.org/v2/everything?sources={}&apiKey=d1586deac05c4d1fbf9742533adf9dea'
     NEWS_API_KEY = os.environ.get('d1586deac05c4d1fbf9742533adf9dea') 
-    SECRET_KEY= os.environ.get('12345')
+    SECRET_KEY= os.environ.get('kazuba')
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:kazuba1@localhost/watchlist'
 
 class ProdConfig(Config):
     '''
