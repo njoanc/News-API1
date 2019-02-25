@@ -3,6 +3,7 @@ from . import main
 from ..request import get_news,get_news,search_news
 # from .forms import ReviewForm
 from ..models import Review
+from flask_login import login_required
 
 
 # Views
@@ -58,6 +59,7 @@ def search(news_author):
     return render_template('search.html',news = searched_news)
 
 @main.route('/news/review/new/<author>', methods = ['GET','POST'])
+@login_required
 def new_review(author):
     
     form = ReviewForm()

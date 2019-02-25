@@ -3,6 +3,7 @@ from app import app
 from .request import get_news,search_news, get_sources
 from .models import reviews
 from .forms import ReviewForm
+
 Review = reviews.Review
 
 
