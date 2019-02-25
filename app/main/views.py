@@ -4,7 +4,7 @@ from ..request import get_news,get_news,search_news
 # from .forms import ReviewForm,UpdateProfile
 from .. import db,photos
 from ..models import Review, User
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 
 # Views
@@ -69,7 +69,11 @@ def new_review(author):
     if form.validate_on_submit():
         title = form.title.data
         review = form.review.data
-        new_review = Review(news.author,title,news.urlToImage,review)
+
+         # Updated review instance
+        new_review = Review(news_title=news.title,urlToImage=news.urlToImage,news_review=review,user=current_user)
+
+        # new_review = Review(news.author,title,news.urlToImage,review)
         new_review.save_review()
         return redirect(url_for('news',title = news.title ))
 
@@ -106,3 +110,12 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
