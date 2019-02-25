@@ -9,7 +9,8 @@ class Config:
     NEWS_API_KEY = os.environ.get('d1586deac05c4d1fbf9742533adf9dea') 
     SECRET_KEY= os.environ.get('kazuba')
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:kazuba1@localhost/watchlist'
-
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
+    
 class ProdConfig(Config):
     '''
     Production  configuration child class
