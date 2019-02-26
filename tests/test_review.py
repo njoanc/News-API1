@@ -1,4 +1,4 @@
-from app.models import Review,User
+from app.models import User
 from app import db
 
 
