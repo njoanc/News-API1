@@ -1,27 +1,85 @@
-from flask import render_template,request,redirect,url_for
-
+from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..requests import get_news,get_news,search_news
-
+from ..models import User
+# from .request import get_news,search_news, get_sources
+# from .models import reviews
 from .forms import ReviewForm
-from ..models import Review
+from flask_login import login_required
+
+
+# Review = reviews.Review
 
 # Views
 @main.route('/')
 def index():
+    title = 'Home - Welcome to the Pitches Website'
+    return render_template('index.html', title = title)
 
-def create_app(config_name):
-    app = Flask(__name__)
 
-    # Creating the app configurations
-    app.config.from_object(config_options[config_name])
+# @app.route('/news/<title>')
+# def news(title):
 
-    # Initializing flask extensions
-    bootstrap.init_app(app)
+#     '''
+#     View news page function that returns the news details page and its data
+#     '''
+#     news = get_news(title)
 
-    # Registering the blueprint
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+#     title = f'{title}'
+   
 
-    return app
+#     return render_template('news.html',title = title,news=news)
 
+# @app.route('/search/<news_author>')
+# def search(news_author):
+#     '''
+#     View function to display the search articles
+#     '''
+#     news_author_list = news_author.split(" ")
+#     news_author_format = "+".join(news_author_list)
+#     searched_news = search_news(news_author_format)
+#     title = f'search articles for {news_author}'
+#     return render_template('search.html',news = searched_news)
+
+# @app.route('/news/review/new/<author>', methods = ['GET','POST'])
+# def new_review(author):
+    
+#     form = ReviewForm()
+#     news = get_news(author)
+
+#     if form.validate_on_submit():
+#         title = form.title.data
+#         review = form.review.data
+#         new_review = Review(news.author,title,news.urlToImage,review)
+#         new_review.save_review()
+#         return redirect(url_for('news',title = news.title ))
+
+#     title = f'{news.title} review'
+#     return render_template('new_review.html',title = title, review_form=form, news=news)
+
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
+
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=user.username))
+
+    return render_template('profile/update.html',form =form)

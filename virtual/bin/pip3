@@ -1,4 +1,4 @@
-#!/home/wecode/News-API/virtual/bin/python
+#!/home/wecode/Desktop/Pitch-API/virtual/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
