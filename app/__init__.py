@@ -37,8 +37,8 @@ def create_app(config_name):
     configure_uploads(app,photos)
 
     # setting config
-    from .request import configure_request
-    configure_request(app)
+    # from .request import configure_request
+    # configure_request(app)
 
     # Will add the views and forms
     from .auth import auth as auth_blueprint

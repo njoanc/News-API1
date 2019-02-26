@@ -4,11 +4,8 @@ class Config:
     '''
     General configuration parent class
     '''
-    NEWS_SOURCES_BASE_URL='https://newsapi.org/v2/sources?apiKey=d1586deac05c4d1fbf9742533adf9dea'
-    NEWS_API_BASE_URL= 'https://newsapi.org/v2/everything?sources={}&apiKey=d1586deac05c4d1fbf9742533adf9dea'
-    NEWS_API_KEY = os.environ.get('d1586deac05c4d1fbf9742533adf9dea') 
     SECRET_KEY= os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:kazuba1@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:kazuba1@localhost/pitch'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     #  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -37,10 +34,10 @@ class DevConfig(Config):
     DEBUG = True
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:kazuba1@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:kazuba1@localhost/pitch'
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:kazuba1@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:kazuba1@localhost/pitch'
     DEBUG = True
 
 config_options = {

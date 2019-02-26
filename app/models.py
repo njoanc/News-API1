@@ -9,29 +9,29 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-class Source:
-    '''
-    Sources class to define Sources Objects
-    '''
+# class Source:
+#     '''
+#     Sources class to define Sources Objects
+#     '''
 
-    def __init__(self,id,name,description):
-        self.id=id
-        self.name=name
-        self.description = description
+#     def __init__(self,id,name,description):
+#         self.id=id
+#         self.name=name
+#         self.description = description
 
-class News:
-    '''
-    News class to define News Objects
-    '''
+# class News:
+#     '''
+#     News class to define News Objects
+#     '''
 
-    def __init__(self,author,title,description,url,urlToImage,publishedAt,content):
-        self.author=author
-        self.title = title
-        self.description=description
-        self.url = url
-        self.urlToImage = urlToImage
-        self.publishedAt = publishedAt
-        self.content = content
+#     def __init__(self,author,title,description,url,urlToImage,publishedAt,content):
+#         self.author=author
+#         self.title = title
+#         self.description=description
+#         self.url = url
+#         self.urlToImage = urlToImage
+#         self.publishedAt = publishedAt
+#         self.content = content
 
 
 # class Review:
@@ -63,26 +63,26 @@ class News:
 #                 response.append(review)
 
 #         return response
-class Review(db.Model):
+# class Review(db.Model):
 
-    __tablename__ = 'reviews'
+#     __tablename__ = 'reviews'
 
-    id = db.Column(db.Integer,primary_key = True)
-    news_id = db.Column(db.Integer)
-    news_title = db.Column(db.String)
-    urlToImage = db.Column(db.String)
-    news_review = db.Column(db.String)
-    posted = db.Column(db.DateTime,default=datetime.utcnow)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+#     id = db.Column(db.Integer,primary_key = True)
+#     news_id = db.Column(db.Integer)
+#     news_title = db.Column(db.String)
+#     urlToImage = db.Column(db.String)
+#     news_review = db.Column(db.String)
+#     posted = db.Column(db.DateTime,default=datetime.utcnow)
+#     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
-    def save_review(self):
-        db.session.add(self)
-        db.session.commit()
+#     def save_review(self):
+#         db.session.add(self)
+#         db.session.commit()
 
-    @classmethod
-    def get_reviews(cls,id):
-        reviews = Review.query.filter_by(news_id=id).all()
-        return reviews
+#     @classmethod
+#     def get_reviews(cls,id):
+#         reviews = Review.query.filter_by(news_id=id).all()
+#         return reviews
         
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
@@ -123,13 +123,13 @@ class User(UserMixin,db.Model):
     def verify_password(self,password):
         return check_password_hash(self.pass_secure,password)
 
-class Role(db.Model):
-    __tablename__ = 'roles'
+# class Role(db.Model):
+#     __tablename__ = 'roles'
 
-    id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255))
-    users = db.relationship('User',backref = 'role',lazy="dynamic")
+#     id = db.Column(db.Integer,primary_key = True)
+#     name = db.Column(db.String(255))
+#     users = db.relationship('User',backref = 'role',lazy="dynamic")
 
-    def __repr__(self):
-        return f'User {self.name}'
+#     def __repr__(self):
+#         return f'User {self.name}'
     
