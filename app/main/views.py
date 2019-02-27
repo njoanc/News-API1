@@ -3,7 +3,7 @@ from . import main
 from ..models import User
 # from .request import get_news,search_news, get_sources
 # from .models import reviews
-from .forms import ReviewForm
+from .forms import ReviewForm,UpdateProfile
 from flask_login import login_required
 
 
@@ -63,7 +63,7 @@ def profile(uname):
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user)
+    return render_template("profile/profile.html", user=user)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -80,6 +80,6 @@ def update_profile(uname):
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('.profile',uname=user.username))
+        return redirect(url_for('main.profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)

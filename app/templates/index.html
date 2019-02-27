@@ -13,22 +13,41 @@
 <div class="container">
         <img id="moringa"
         src="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/566/s200/10710615-512708608864666-6379526937469666187-n.png">
-    <div form>
-        <form>
-            <input type="text" name="news_query" placeholder="Search for News" class="form-control">
-            <input type="submit"  value="Submit" class="btn btn-default">
-        </form>
+</div>
+<h1 style="color:rgb(0, 23, 128);"> Welcome to the pitches Application</h1>
+<div class="tab-content">
+    <div style="margin-top: 1em;" class="tab-pane active" id="Pickup" role="tabpanel">
+        <div class="container-fluid" style="margin: 0% 2%">
+            <div class="row">
+            {{macro.displayPitchList(pickup_lines)}}
+            </div>
+        </div>
     </div>
-        
-    <h1 style="color:rgb(0, 23, 128);"> Welcome!!!!!</h1>
-
-    <!-- Popular news section  -->
-    <!-- <div popularNews>
-        <h3> Popular News</h3>
-        <ul>{{ macro.displayNewsList(popular)}}</ul> 
-    </div> -->
- </div>
- <footer class="footer">
+    <div style="margin-top: 1em;" class="tab-pane" id="Products" role="tabpanel">
+        <div class="container-fluid" style="margin: 0% 2%">
+            <div class="row">
+            {{macro.displayPitchList(product_pitch)}}
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 1em;" class="tab-pane" id="Interviews" role="tabpanel">
+        <div class="container-fluid" style="margin: 0% 2%">
+            <div class="row">
+            {{macro.displayPitchList(interview_pitch)}}
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 1em;" class="tab-pane" id="Promotions" role="tabpanel">
+        <div class="container-fluid" style="margin: 0% 2%">
+            <div class="row">
+            {{macro.displayPitchList(promotion_pitch)}}
+            </div>
+        </div>
+    </div>
+</div>
+  
+<footer class="footer">
     <p class="footerP">© jehanne@moringaschool 2019 ©</p>
 </footer>
 {% endblock%}

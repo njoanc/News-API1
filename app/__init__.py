@@ -9,9 +9,11 @@ from flask_mail import Mail
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
+
 photos = UploadSet('photos',IMAGES)
 mail = Mail()
 
@@ -36,9 +38,6 @@ def create_app(config_name):
     # configure UploadSet
     configure_uploads(app,photos)
 
-    # setting config
-    # from .request import configure_request
-    # configure_request(app)
 
     # Will add the views and forms
     from .auth import auth as auth_blueprint

@@ -11,32 +11,16 @@ def load_user(user_id):
         
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
-
-    # reviews = db.relationship('Review',backref = 'user',lazy = "dynamic")
-
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
-    # role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    pitches = db.relationship('Pitch',backref = 'user',lazy="dynamic")
+    comments= db.relationship('Comment', backref= 'user', lazy='dynamic')
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
-    # password_hash = db.Column(db.String(255))
-
-    # def save_review(self):
-    #     db.session.add(self)
-    #     db.session.commit()
-
-    # @classmethod
-    # def get_reviews(cls,id):
-    #     reviews = Review.query.filter_by(news_id=id).all()
-    #     return reviews
-
-    def __repr__(self):
-        return f'User {self.username}'
+   
     
-    # pass_secure  = db.Column(db.String(255))
-
     @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
@@ -47,14 +31,37 @@ class User(UserMixin,db.Model):
 
     def verify_password(self,password):
         return check_password_hash(self.pass_secure,password)
+    
+    def __repr__(self):
+        return f'User {self.username}'
 
-# class Role(db.Model):
-#     __tablename__ = 'roles'
+class Pitch(db.Model):
+    __tablename__ = 'pitches'
 
-#     id = db.Column(db.Integer,primary_key = True)
-#     name = db.Column(db.String(255))
-#     users = db.relationship('User',backref = 'role',lazy="dynamic")
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    pitch_content = db.Column(db.String)
+    category = db.Column(db.String(255))
+    author = db.Column(db.String(255))
+    upvote = db.Column(db.Integer)
+    downvote = db.Column(db.Integer)        
+    published_at = db.Column(db.DateTime, default = datetime.utcnow)    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    comments = db.relationship('Comment', backref = 'pitch', lazy = 'dynamic')
 
-#     def __repr__(self):
-#         return f'User {self.name}'
+    
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key = True)    
+    body = db.Column(db.String)          
+    published_at = db.Column(db.DateTime, default = datetime.utcnow)    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+   
     
