@@ -1,5 +1,7 @@
-{% extends './base.html' %} 
-{% import 'bootstrap/wtf.html' as wtf %} 
+{% extends 'base.html' %} 
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
 {% block body %}
 
 <style>
@@ -9,8 +11,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      padding: 3%;
-      height: 80%;
+      padding: 3.5%;
+      height: 95%;
       width: 50%;
       background-color: white;
       box-shadow: 4px 6px rgba(211, 211, 211, 0.3);
@@ -24,20 +26,20 @@
     }
     .btn {
       background-color: white;
-      border: 1px solid rgb(184, 206, 228);
-      color: rgb(165, 198, 231);
+      border: 1px solid dodgerblue;
+      color: dodgerblue;
       margin-top: 3.5%;
     }
   }
   @media screen and (max-width: 1920px) and (min-width: 1240px) {
     .container-fluid {
-      height: 90%;
+      height: 90.9%;
       padding-top: 4%;
     }
   }
   @media screen and (max-width: 1240px) and (min-width: 769px) {
     .container-fluid {
-      height: 90%;
+      height: 90.9%;
       padding-top: 10%;
     }
     .container {
@@ -64,24 +66,20 @@
     }
     .btn {
       background-color: white;
-      border: 1px solid rgb(170, 202, 235);
-      color: rgb(143, 190, 238);
-      margin: 3% 0%;
+      border: 1px solid dodgerblue;
+      color: dodgerblue;
+      margin: 3.5% 0%;
     }
   }
 </style>
 
 <div class="container-fluid">
 
-  <div class="container">
-
-    {{wtf.quick_form(login_form)}}
-
-    <p style="margin-top: 3%;">Don't have an account?
-      <a href="{{url_for('auth.register')}}">Sign up</a>
-    </p>
+    <div class="container">
+  
+      {{wtf.quick_form(pitch_form)}}
+  
+    </div>
   </div>
-
-</div>
 
 {% endblock %}
