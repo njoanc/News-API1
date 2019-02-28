@@ -1,15 +1,33 @@
 {% extends 'base.html' %} {% import 'macros.html' as macro %} {% block body %}
-
 <style>
-  .tab {
-    border-right: 1.5px solid rgba(211, 211, 211, 0.5);
-  }
+  img {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+  
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 
-  .nav-tabs {
-    background-color: white;
-    box-shadow: 2px 2px rgba(169, 169, 169, 0.2);
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
   }
+}
 </style>
+<img src="https://bit.ly/2tJBM2u" alt="Pitch">
 
 <ul class="nav nav-tabs nav-justified" role="tablist">
   <li class="nav-item tab">
@@ -26,7 +44,7 @@
   </li>
 </ul>
 
-<a href="{{url_for('main.new_pitch')}}" style = "margin-left: 3.25%; color: #08bec6;">
+<a href="{{url_for('main.new_pitch')}}" style = "margin-left: 3.25%; color: #4ee630;">
   <span>New Pitch<span>
 </a>
 
