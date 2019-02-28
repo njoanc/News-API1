@@ -1,16 +1,4 @@
 {% extends 'base.html' %} {% import 'macros.html' as macro %} {% block body %}
-
-<style>
-  .tab {
-    border-right: 1.5px solid rgba(211, 211, 211, 0.5);
-  }
-
-  .nav-tabs {
-    background-color: white;
-    box-shadow: 2px 2px rgba(169, 169, 169, 0.2);
-  }
-</style>
-
 <ul class="nav nav-tabs nav-justified" role="tablist">
   <li class="nav-item tab">
     <a class="nav-link" data-toggle="tab" href="#Products" role="tab">Products</a>
@@ -26,7 +14,7 @@
   </li>
 </ul>
 
-<a href="{{url_for('main.new_pitch')}}" style = "margin-left: 3.25%; color: #08bec6;">
+<a href="{{url_for('main.new_pitch')}}" style = "margin-left: 3.25%; color: #4ee630;">
   <span>New Pitch<span>
 </a>
 
